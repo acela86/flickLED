@@ -1,0 +1,15 @@
+普通,local.png,utl
+普通[東京経由],local_via_tokyo.png,utl
+普通[上野経由],local_via_ueno.png,utl
+普通[新宿経由],local_via_shinjuku.png,ssl
+快速,rapid.png,ssl
+快速[新宿経由],rapid_via_shinjuku.png,ssl
+快速アクティー,acty.png,utl
+快速アクティー[東京経由],acty_via_tokyo.png,utl
+快速ラビット,rabbit.png,utl
+快速ラビット[上野経由],rabbit_via_ueno.png,utl
+快速アーバン,urban.png,utl
+快速アーバン[上野経由],urban_via_ueno.png,utl
+特別快速,special_rapid.png,ssl
+特別快速[新宿経由],special_rapid_via_shinjuku.png,ssl
+通勤快速,com_rapid.png,utl

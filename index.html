@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+	<meta charset="UTF-8">
+	<title>E233-3000 side LED</title>
+	<script type="text/javascript" charset="UTF-8" src="jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" charset="UTF-8" src="jquery.flickEndless-1.0.3.js"></script>
+	<script type="text/javascript" charset="UTF-8">
+		$(function () {
+			type_idx = 0
+			dest_idx = 0
+
+			$('#type_ul').load('./cgi-bin/get_type_list.py', function () {
+				$('#type_list').flickEndless({
+					vertical: true,
+					onPageChange: function () {
+						type_idx = (this.page == this.count) ? 1 : this.page + 1;
+						type_li = $('#type_list li').eq(type_idx - 1);
+
+						$('#type_selected').html(type_li.attr('value'));
+
+						if (type_li.attr('class') == 'type_utl') {
+							$('#dest_list .dest_utl').show();
+							$('#dest_list .dest_ssl').hide();
+						}
+						if (type_li.attr('class') == 'type_ssl') {
+							$('#dest_list .dest_utl').hide();
+							$('#dest_list .dest_ssl').show();
+						}
+
+						send_selector();
+					}
+				});
+			});
+
+			$('#dest_ul').load('./cgi-bin/get_dest_list.py', function () {
+				$('#dest_list').flickEndless({
+					vertical: true,
+					onPageChange: function () {
+						dest_idx = (this.page == this.count) ? 1 : this.page + 1;
+						dest_li = $('#dest_list li').eq(dest_idx - 1);
+						$('#dest_selected').html(dest_li.attr('value'));
+
+						send_selector();
+					}
+				});
+			});
+
+			function send_selector() {
+				data = { 'type': type_idx - 1, 'dest': dest_idx - 1 };
+				$.ajax({
+					type: 'POST',
+					url: '/',
+					data: JSON.stringify(data),
+					contentType: 'application/json',
+					dataType: "json",
+					// success: success,
+				});
+			}
+		});
+	</script>
+	<style>
+		html {
+			height: 100%;
+			margin: 0 auto;
+			padding: 0;
+			display: table;
+		}
+
+		body {
+			min-height: 100%;
+			margin: 0 auto;
+			padding: 0;
+			display: table-cell;
+			vertical-align: middle;
+
+			font-family: 'ヒラギノ角ゴ Pro W3', 'Meiryo UI';
+			color: #ddd;
+			background-color: #222;
+		}
+
+		img {
+			border: none;
+		}
+
+		.flick {
+			-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+			background-color: #222;
+		}
+
+		.flick ul {
+			display: block;
+			margin: 0;
+			padding: 0;
+		}
+
+		.flick ul li {
+			float: left;
+			list-style-type: none;
+			text-align: center;
+			border: none;
+		}
+
+		#selector {
+			width: 640px;
+			height: 483px;
+			position: relative;
+			margin: auto;
+		}
+
+		#type_list {
+			width: 240px;
+			height: 483px;
+			padding: 0px;
+			float: left;
+		}
+
+		#type_list ul li {
+			display: block;
+			width: 240px;
+			height: 160px;
+			padding: 1px 0px;
+			border: none;
+			background-color: #000
+		}
+
+		#type_list img {
+			width: 240px;
+			height: 160px;
+		}
+
+		#dest_list {
+			width: 400px;
+			height: 483px;
+			padding: 0px;
+			float: left;
+		}
+
+		#dest_list ul li {
+			width: 400px;
+			height: 160px;
+			padding: 1px 0px;
+			background-color: #000
+		}
+
+		#dest_list img {
+			width: 400px;
+			height: 160px;
+		}
+
+		#cover_upper {
+			position: absolute;
+			width: 100%;
+			height: 96px;
+			top: 0px;
+			/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#222222+0,222222+50,222222+100&1+0,0.75+50,0+100 */
+			background: -moz-linear-gradient(top, rgba(34, 34, 34, 1) 0%, rgba(34, 34, 34, 0.75) 50%, rgba(34, 34, 34, 0) 100%);
+			/* FF3.6-15 */
+			background: -webkit-linear-gradient(top, rgba(34, 34, 34, 1) 0%, rgba(34, 34, 34, 0.75) 50%, rgba(34, 34, 34, 0) 100%);
+			/* Chrome10-25,Safari5.1-6 */
+			background: linear-gradient(to bottom, rgba(34, 34, 34, 1) 0%, rgba(34, 34, 34, 0.75) 50%, rgba(34, 34, 34, 0) 100%);
+			/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+			filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#222222', endColorstr='#00222222', GradientType=0);
+			/* IE6-9 */
+			pointer-events: none;
+		}
+
+		#cover_lower {
+			position: absolute;
+			width: 100%;
+			height: 96px;
+			bottom: 0px;
+			/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#222222+0,222222+50,222222+100&0+0,0.75+50,1+100 */
+			background: -moz-linear-gradient(top, rgba(34, 34, 34, 0) 0%, rgba(34, 34, 34, 0.75) 50%, rgba(34, 34, 34, 1) 100%);
+			/* FF3.6-15 */
+			background: -webkit-linear-gradient(top, rgba(34, 34, 34, 0) 0%, rgba(34, 34, 34, 0.75) 50%, rgba(34, 34, 34, 1) 100%);
+			/* Chrome10-25,Safari5.1-6 */
+			background: linear-gradient(to bottom, rgba(34, 34, 34, 0) 0%, rgba(34, 34, 34, 0.75) 50%, rgba(34, 34, 34, 1) 100%);
+			/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+			filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00222222', endColorstr='#222222', GradientType=0);
+			/* IE6-9 */
+			pointer-events: none;
+		}
+	</style>
+</head>
+
+<body style="width: 100%; height: 100%;">
+	<div id="selector">
+		<div id="type_list" class="type_list flick">
+			<ul id="type_ul">
+			</ul>
+		</div>
+		<div id="dest_list" class="dest_list flick">
+			<ul id="dest_ul">
+			</ul>
+		</div>
+		<div id="cover_upper"></div>
+		<div id="cover_lower"></div>
+	</div>
+
+	<div style="clear:both; visibility:hidden;">
+		<span id="type_selected"></span>
+		| <span id="dest_selected"></span>
+		<p id="debug"></p>
+	</div>
+
+</body>
+
+</html>
