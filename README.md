@@ -49,10 +49,11 @@ Raspberry Piに本レポジトリをクローンした後に以下を実行し�
 
 **1. ファイル属性の変更**
 
-`/cgi-bin/` ディレクトリで以下のコマンドを実行し、Pythonファイルに実行権限を付与します。
+レポジトリをクローンしたディレクトリで以下のコマンドを実行し、Pythonのスクリプトファイルに実行権限を付与します。
 
 ```
 chmod u+x *.py
+chmod a+x ./cgi-bin/*.py
 ```
 
 **2. LEDマトリクスパネル制御ライブラリのインストール**
@@ -61,7 +62,7 @@ chmod u+x *.py
 
 [Driving Matrices | Adafruit RGB Matrix + Real Time Clock HAT for Raspberry Pi | Adafruit Learning System](https://learn.adafruit.com/adafruit-rgb-matrix-plus-real-time-clock-hat-for-raspberry-pi/driving-matrices)
 
-## プログラムの実行
+## ソフトウェアの実行
 
 レポジトリをクローンしたディレクトリで以下のコマンドを実行するとソフトウェアが起動し、LEDマトリクスパネルに行先が表示されます。
 （起動時は［普通｜前橋］となります）
@@ -73,7 +74,7 @@ sudo ./app.py
 WebブラウザからRaspberry Pi（ポート番号：8000）にアクセスすると、表示内容を設定するためのページが表示されます。
 （デフォルトURL： ```http://raspberrypi.local:8000```）
 
-なお、Windows上で実行するとシミュレータモードで動作します（matplotlibが必要となります）。
+なお、本ソフトウェアをWindows上で実行するとシミュレータモードで動作します（matplotlibが必要となります）。
 
 ## 問い合わせ
 
@@ -86,10 +87,10 @@ Twitterアカウント（[@acela86](https://twitter.com/acela86)）にリプラ�
 本ソフトウェアの使用により生じたいかなる損害に関して、作者は一切の責任を負いません。
 
 ## ライセンス (License)
-このソフトウェアはMITライセンスのもとで公開されています。詳細はLICENSEをご覧ください。
+本ソフトウェアはMITライセンスのもとで公開されています。詳細はLICENSEをご覧ください。
 (This software is released under the MIT License, see LICENSE.)
 
-また、このソフトウェアは以下のライブラリを再利用しています。
+また、本ソフトウェアは以下のライブラリを再利用しています。
 (These libraries are also used in this software.)
 
 * jQuery (MIT license, copyrighted by jQuery Foundation, Inc.)
