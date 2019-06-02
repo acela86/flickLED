@@ -6,14 +6,32 @@ from rgbmatrix import RGBMatrix, RGBMatrixOptions
 import threading
 import time
 
-"""
-LED Matrix Control Class
-"""
 class controller(threading.Thread):
+    """A Class to show a image to a LED matrix.
+
+    Attributes:
+        img: An image to show in the LED matrix.
+        stop_event: A flag to terminate the control loop.
+        update_event: A flag to update an image to show.
+    """
+
     def setRGBData(self, rgb_im):
+        """Set Imge data to the LED matrix.
+
+        Args:
+            rgb_im: a PIL RGB image
+        """
         self.matrix.SetImage(rgb_im)
     
     def __init__(self, rows, chain_length, brightness):
+        """Initialize a LED matrix.
+
+        Args:
+            rows: The numberof matrix rows (usually 32 or 64).
+            chain_length: The number of daisy-chained panels.
+            brightness: LED brightness (0-100).
+        """
+        # LED control options
         options = RGBMatrixOptions()
         options.rows = rows
         options.chain_length = chain_length
@@ -30,6 +48,7 @@ class controller(threading.Thread):
         threading.Thread.__init__(self)
         
     def run(self):
+        """Run a control loop."""
         while not self.stop_event.is_set():
             self.update_event.wait(3)
             if (self.update_event.is_set()):
@@ -39,4 +58,9 @@ class controller(threading.Thread):
         self.matrix.Clear()
 
 def wait(seconds):
+    """Wait for specified seconds.
+
+    Args:
+        seconds: Time to wait.
+    """
     time.sleep(seconds)
