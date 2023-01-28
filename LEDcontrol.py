@@ -23,7 +23,7 @@ class controller(threading.Thread):
         """
         self.matrix.SetImage(rgb_im)
     
-    def __init__(self, rows, chain_length, brightness):
+    def __init__(self, rows, chain_length, brightness, rgb_sequence = 'RGB'):
         """Initialize a LED matrix.
 
         Args:
@@ -38,6 +38,7 @@ class controller(threading.Thread):
         options.parallel = 1
         options.hardware_mapping = 'adafruit-hat'
         options.brightness = brightness
+        options.led_rgb_sequence = rgb_sequence    # Green/Blue flip support
         
         self.matrix = RGBMatrix(options = options)
         self.img = Image.new('RGB', (rows * chain_length, rows), (0, 0, 0))

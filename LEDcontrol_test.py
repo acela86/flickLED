@@ -21,7 +21,7 @@ class controller(threading.Thread):
     blightness = 1.0
     count = showrate - 1
 
-    def __init__(self, rows, chain_length, brightness):
+    def __init__(self, rows, chain_length, brightness, rgb_sequence = 'RGB'):
         """Initialize a LED matrix.
 
         Args:
