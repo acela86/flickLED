@@ -33,6 +33,7 @@ dest_LEDs = LEDdata.get_dest_LEDs()
 rows = 32
 chain_length = 4
 brightness = 50
+rgb_sequence = 'RGB'    # Default = 'RGB', Green/Blue swap = 'RBG'
 
 # Showing parameters
 background_color = (0, 0, 0)
@@ -136,7 +137,7 @@ if __name__ == '__main__':
     q.put({'type':1, 'dest':1})
     
     # Initialize LED control thread
-    LED_controller_thread = LEDcontrol.controller(rows, chain_length, brightness)
+    LED_controller_thread = LEDcontrol.controller(rows, chain_length, brightness, rgb_sequence)
     LED_controller_thread.background_color = background_color
     LED_controller_thread.start()
     
